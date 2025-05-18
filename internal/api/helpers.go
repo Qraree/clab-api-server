@@ -127,6 +127,23 @@ func isSuperuser(username string) bool {
 	return inGroup
 }
 
+// requireSuperuser verifies the user is in the configured superuser group.
+// It logs a warning and sends a 403 response if the user lacks privileges.
+// The action string is used for contextual logging; it can be empty.
+// Returns true if the user is a superuser and the caller may proceed.
+func requireSuperuser(c *gin.Context, username, action string) bool {
+	if isSuperuser(username) {
+		return true
+	}
+	if action != "" {
+		log.Warnf("User '%s' attempted to %s without superuser privileges.", username, action)
+	} else {
+		log.Warnf("User '%s' attempted a superuser-only action without privileges.", username)
+	}
+	c.JSON(http.StatusForbidden, models.ErrorResponse{Error: "Superuser privileges required for this operation"})
+	return false
+}
+
 // Helper to get and ensure the base directory for user certificates IN THE USER'S HOME.
 // Attempts to set ownership of the base directory to the user.
 func getUserCertBasePath(username string) (string, error) {
