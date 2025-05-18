@@ -66,9 +66,7 @@ func SystemMetricsHandler(c *gin.Context) {
 	username := c.GetString("username")
 
 	// --- Authorization: Superuser Only ---
-	if !isSuperuser(username) {
-		log.Warnf("User '%s' attempted to access system metrics without superuser privileges.", username)
-		c.JSON(http.StatusForbidden, models.ErrorResponse{Error: "superuser privileges required for this operation"})
+	if !requireSuperuser(c, username, "access system metrics") {
 		return
 	}
 

@@ -5,6 +5,7 @@ import (
 	"encoding/json"
 	"fmt"
 	"net/http"
+	"strings"
 	"testing"
 	"time"
 
@@ -142,7 +143,7 @@ func (s *HealthSuite) TestMetricsEndpointRegularUser() {
 
 	err = json.Unmarshal(bodyBytes, &errResp)
 	s.Assert().NoError(err, "Failed to unmarshal error response. Body: %s", string(bodyBytes))
-	s.Assert().Contains(errResp.Error, "superuser privileges required", "Error message should indicate superuser privileges are required")
+	s.Assert().Contains(strings.ToLower(errResp.Error), "superuser privileges required", "Error message should indicate superuser privileges are required")
 
 	if statusCode == http.StatusForbidden {
 		s.logSuccess("Correctly received 403 Forbidden when accessing metrics as regular user")

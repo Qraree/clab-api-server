@@ -196,9 +196,9 @@ func ListSSHSessionsHandler(c *gin.Context) {
 
 	// Only allow superusers to see all sessions
 	if showAllSessions && !userIsSuperuser {
-		log.Warnf("User '%s' attempted to list all SSH sessions without superuser privileges", username)
-		c.JSON(http.StatusForbidden, models.ErrorResponse{Error: "Superuser privileges required to list all SSH sessions"})
-		return
+		if !requireSuperuser(c, username, "list all SSH sessions") {
+			return
+		}
 	}
 
 	// When calling ListSessions:
