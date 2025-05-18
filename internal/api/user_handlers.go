@@ -27,9 +27,7 @@ func ListUsersHandler(c *gin.Context) {
 	username := c.GetString("username")
 
 	// Only superusers can list all users
-	if !isSuperuser(username) {
-		log.Warnf("User '%s' attempted to list all users without superuser privileges", username)
-		c.JSON(http.StatusForbidden, models.ErrorResponse{Error: "Superuser privileges required for this operation"})
+	if !requireSuperuser(c, username, "list all users") {
 		return
 	}
 
@@ -101,9 +99,7 @@ func CreateUserHandler(c *gin.Context) {
 	requestingUser := c.GetString("username")
 
 	// Only superusers can create users
-	if !isSuperuser(requestingUser) {
-		log.Warnf("User '%s' attempted to create a user without superuser privileges", requestingUser)
-		c.JSON(http.StatusForbidden, models.ErrorResponse{Error: "Superuser privileges required for this operation"})
+	if !requireSuperuser(c, requestingUser, "create a user") {
 		return
 	}
 
@@ -214,9 +210,7 @@ func DeleteUserHandler(c *gin.Context) {
 	targetUser := c.Param("username")
 
 	// Only superusers can delete users
-	if !isSuperuser(requestingUser) {
-		log.Warnf("User '%s' attempted to delete user '%s' without superuser privileges", requestingUser, targetUser)
-		c.JSON(http.StatusForbidden, models.ErrorResponse{Error: "Superuser privileges required for this operation"})
+	if !requireSuperuser(c, requestingUser, "delete user '"+targetUser+"'") {
 		return
 	}
 

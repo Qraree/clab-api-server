@@ -38,9 +38,7 @@ func DisableTxOffloadHandler(c *gin.Context) {
 	username := c.GetString("username")
 
 	// --- Authorization: Superuser Only ---
-	if !isSuperuser(username) {
-		log.Warnf("User '%s' attempted to use disable-tx-offload without superuser privileges.", username)
-		c.JSON(http.StatusForbidden, models.ErrorResponse{Error: "Superuser privileges required for this operation."})
+	if !requireSuperuser(c, username, "use disable-tx-offload") {
 		return
 	}
 
@@ -105,9 +103,7 @@ func CreateCAHandler(c *gin.Context) {
 	username := c.GetString("username")
 
 	// --- Authorization: Superuser Only ---
-	if !isSuperuser(username) {
-		log.Warnf("User '%s' attempted to use cert ca create without superuser privileges.", username)
-		c.JSON(http.StatusForbidden, models.ErrorResponse{Error: "Superuser privileges required for this operation."})
+	if !requireSuperuser(c, username, "use cert ca create") {
 		return
 	}
 
@@ -269,9 +265,7 @@ func SignCertHandler(c *gin.Context) {
 	username := c.GetString("username")
 
 	// --- Authorization: Superuser Only ---
-	if !isSuperuser(username) {
-		log.Warnf("User '%s' attempted to use cert sign without superuser privileges.", username)
-		c.JSON(http.StatusForbidden, models.ErrorResponse{Error: "Superuser privileges required for this operation."})
+	if !requireSuperuser(c, username, "use cert sign") {
 		return
 	}
 
@@ -700,9 +694,7 @@ func CreateVethHandler(c *gin.Context) {
 	username := c.GetString("username")
 
 	// --- Authorization: Superuser Only ---
-	if !isSuperuser(username) {
-		log.Warnf("User '%s' attempted to use veth create without superuser privileges.", username)
-		c.JSON(http.StatusForbidden, models.ErrorResponse{Error: "Superuser privileges required for this operation."})
+	if !requireSuperuser(c, username, "use veth create") {
 		return
 	}
 
@@ -781,9 +773,7 @@ func CreateVxlanHandler(c *gin.Context) {
 	username := c.GetString("username")
 
 	// --- Authorization: Superuser Only ---
-	if !isSuperuser(username) {
-		log.Warnf("User '%s' attempted to use vxlan create without superuser privileges.", username)
-		c.JSON(http.StatusForbidden, models.ErrorResponse{Error: "Superuser privileges required for this operation."})
+	if !requireSuperuser(c, username, "use vxlan create") {
 		return
 	}
 
@@ -878,9 +868,7 @@ func DeleteVxlanHandler(c *gin.Context) {
 	username := c.GetString("username")
 
 	// --- Authorization: Superuser Only ---
-	if !isSuperuser(username) {
-		log.Warnf("User '%s' attempted to use vxlan delete without superuser privileges.", username)
-		c.JSON(http.StatusForbidden, models.ErrorResponse{Error: "Superuser privileges required for this operation."})
+	if !requireSuperuser(c, username, "use vxlan delete") {
 		return
 	}
 
