@@ -706,7 +706,7 @@ definitions:
         example: 1400
         type: integer
       port:
-        description: UDP port number for the VxLAN tunnel. Defaults to 4789 if omitted.
+        description: UDP port number for the VxLAN tunnel. Defaults to 14789 if omitted.
         example: 4789
         type: integer
       remote:

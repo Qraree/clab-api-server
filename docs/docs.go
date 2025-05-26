@@ -3234,9 +3234,9 @@ const docTemplate = `{
                     "example": 1400
                 },
                 "port": {
-                    "description": "UDP port number for the VxLAN tunnel. Defaults to 4789 if omitted.",
+                    "description": "UDP port number for the VxLAN tunnel. Defaults to 14789 if omitted.",
                     "type": "integer",
-                    "example": 4789
+                    "example": 14789
                 },
                 "remote": {
                     "description": "Remote VTEP IP address.",
