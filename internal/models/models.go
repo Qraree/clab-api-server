@@ -270,7 +270,7 @@ type VxlanCreateRequest struct {
 	// VxLAN Network Identifier (VNI). Defaults to 10 if omitted.
 	ID int `json:"id,omitempty" example:"100"`
 
-	// UDP port number for the VxLAN tunnel. Defaults to 4789 if omitted.
+	// UDP port number for the VxLAN tunnel. Defaults to 14789 if omitted.
 	Port int `json:"port,omitempty" example:"4789"` // Default is 4789 (IANA standard)
 
 	// Optional: Linux device to use for the tunnel source. Auto-detected if omitted.

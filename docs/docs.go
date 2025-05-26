@@ -2985,6 +2985,10 @@ const docTemplate = `{
                     "description": "How long the access should be valid for (e.g., \"1h\", \"30m\")",
                     "type": "string"
                 },
+                "port": {
+                    "description": "Which internal node port shoul be open",
+                    "type": "integer"
+                },
                 "sshUsername": {
                     "description": "Optional override for container's SSH user",
                     "type": "string"
@@ -3234,7 +3238,7 @@ const docTemplate = `{
                     "example": 1400
                 },
                 "port": {
-                    "description": "UDP port number for the VxLAN tunnel. Defaults to 4789 if omitted.",
+                    "description": "UDP port number for the VxLAN tunnel. Defaults to 14789 if omitted.",
                     "type": "integer",
                     "example": 4789
                 },
