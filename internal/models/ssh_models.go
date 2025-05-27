@@ -7,6 +7,7 @@ import "time"
 type SSHAccessRequest struct {
 	SSHUsername string `json:"sshUsername,omitempty"` // Optional override for container's SSH user
 	Duration    string `json:"duration,omitempty"`    // How long the access should be valid for (e.g., "1h", "30m")
+	Port        string `json:"port,omitempty"`        // Which device internal port should be opened
 }
 
 // SSHAccessResponse represents the response with SSH connection details

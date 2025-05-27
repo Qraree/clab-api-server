@@ -2985,6 +2985,10 @@ const docTemplate = `{
                     "description": "How long the access should be valid for (e.g., \"1h\", \"30m\")",
                     "type": "string"
                 },
+                "port": {
+                    "description": "Which device internal port should be opened",
+                    "type": "string"
+                },
                 "sshUsername": {
                     "description": "Optional override for container's SSH user",
                     "type": "string"
