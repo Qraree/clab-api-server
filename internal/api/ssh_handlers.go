@@ -140,7 +140,7 @@ func RequestSSHAccessHandler(c *gin.Context) {
 
 	// Standard SSH port is 22, but some containers might use different ports
 	// This could be made configurable per node type
-	port = req.Port
+	port := req.Port
 	containerPort := port
 
 	// Create SSH session
